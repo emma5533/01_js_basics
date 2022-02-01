@@ -1,18 +1,32 @@
-let timer = document.querySelector("#timer").value;
-let co2UdledtIKgVedFlyrejse = timer * 109;
-let resultat = `Ved ${timer}timers flyrejse har du udledt ${co2UdledtIKgVedFlyrejse}kg CO2.`;
+let timer;
+let co2UdledtIKgVedFlyrejse;
+let klimasynderKommentar;
 
 document.querySelector("button").addEventListener("click", buttonClicked);
 
 function buttonClicked() {
-  if (co2UdledtIKgVedFlyrejse < 100) {
-    resultat += " Tæt på Thunberg";
-  } else if (co2UdledtIKgVedFlyrejse <= 200) {
-    resultat += " Jaja, du behøver ikke at melde dig ud af Å!";
-  } else if (co2UdledtIKgVedFlyrejse <= 600) {
-    resultat += " Det er godt for turismen i nordeuropa";
+  //Vær sikker på at funktionen læser det input der er tastet og tager stilling til det.
+  timer = document.querySelector("#timer").value;
+  //hvis det der er indtastet ikke er et tal, eller tomt så skriv en kommentar.
+  //Ellers, så rund tallet op til et helt tal og..
+  if (isNaN(timer) || timer == "") {
+    console.log("Du har jo ikke tastet et tal ind!");
   } else {
-    resultat += " Nå ja, vi kan jo altid kolonisere en anden planet...";
+    co2UdledtIKgVedFlyrejse = Math.round(timer * 109);
+
+    if (co2UdledtIKgVedFlyrejse < 100) {
+      klimasynderKommentar = " Tæt på Thunberg";
+    } else if (co2UdledtIKgVedFlyrejse <= 200) {
+      klimasynderKommentar = " Jaja, du behøver ikke at melde dig ud af Å!";
+    } else if (co2UdledtIKgVedFlyrejse <= 600) {
+      klimasynderKommentar = " Det er godt for turismen i nordeuropa";
+    } else {
+      klimasynderKommentar =
+        " Nå ja, vi kan jo altid kolonisere en anden planet...";
+    }
   }
+
+  console.log(
+    `Ved ${timer} timers flyrejse har du udledt ${co2UdledtIKgVedFlyrejse} kg CO2. ${klimasynderKommentar} `
+  );
 }
-console.log(resultat);
